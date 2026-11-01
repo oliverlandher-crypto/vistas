@@ -1,0 +1,353 @@
+/* Plantilla consultorio PROFESIONAL — mecánica común, mobile first.
+   Aquí solo va lo que comparten los diseños: estructura, accesibilidad, menú móvil, galería, visor y preguntas. (Copiada de restaurante-profesional y adaptada.)
+   El aspecto de cada diseño (colores, tipografía, radios, portada) está en disenos/<diseno>.css,
+   que construir.py pega DESPUÉS de esta hoja. verificar.py mide los contrastes de la hoja final (G7). */
+
+:root {
+  --fondo: #FFFFFF;
+  --fondo-alt: #F5F5F5;
+  --tarjeta: #FFFFFF;
+  --texto: #1F1F1F;
+  --texto-suave: #575757;
+  --acento: #1F6B45;
+  --acento-fuerte: #18563A;
+  --whatsapp: #0F7A4A;
+  --whatsapp-fuerte: #0B6B3F;
+  --borde: #E0E0E0;
+  --oscuro: #1F1F1F;
+  --pie: #F5F5F5;
+  --pie-texto: #333333;
+  --radio-boton: 8px;
+  --radio-tarjeta: 12px;
+  --ancho: 1200px;
+  --fuente-titulos: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --fuente-texto: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; font-family: var(--fuente-texto); font-size: 1.0625rem; line-height: 1.5; color: var(--texto); background: var(--fondo); overflow-wrap: break-word; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--acento); text-underline-offset: 4px; }
+h1, h2, h3 { font-family: var(--fuente-titulos); margin: 0 0 .75rem; }
+p { margin: 0 0 1rem; }
+:focus-visible { outline: 3px solid var(--acento); outline-offset: 3px; }
+section[id], div[id] { scroll-margin-top: 5rem; }
+
+/* Movimiento: solo respuesta al toque (G15) */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  .boton, .wa-flotante, .nav a, .categorias a { transition: background-color .2s, color .2s, border-color .2s, transform .15s; }
+  .boton:active, .wa-flotante:active { transform: scale(.95); }
+}
+
+.contenedor { width: 100%; max-width: var(--ancho); margin-inline: auto; padding-inline: 1.25rem; }
+.seccion { padding-block: 3.5rem; }
+.seccion--alt { background: var(--fondo-alt); }
+.seccion__intro { max-width: 62ch; color: var(--texto-suave); }
+.seccion__cabeza { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1.5rem; }
+.enlace-mas { display: inline-flex; align-items: center; min-height: 48px; font-weight: 600; color: var(--acento); }
+.saltar { position: absolute; left: -999px; top: 0; background: var(--oscuro); color: #fff; padding: .75rem 1rem; z-index: 100; }
+.saltar:focus { left: 0; }
+.aviso-muestra { margin: 0; padding: .6rem 1.25rem; background: var(--oscuro); color: #fff; font-size: .875rem; text-align: center; }
+
+/* Botones: 48 px mínimo (G10) */
+.boton { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 48px; padding: .7rem 1.4rem; font: inherit; font-size: 1rem; font-weight: 600; text-decoration: none; text-align: center; border: 1px solid transparent; border-radius: var(--radio-boton); cursor: pointer; }
+.boton--wa { background: var(--whatsapp); border-color: var(--whatsapp); color: #fff; }
+.boton--wa:hover { background: var(--whatsapp-fuerte); border-color: var(--whatsapp-fuerte); }
+.boton--borde { background: transparent; color: var(--texto); border-color: var(--texto); }
+.acciones { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
+.acciones .boton { flex: 1 1 100%; }
+
+/* Encabezado y menú móvil */
+.encabezado { position: sticky; top: 0; z-index: 50; background: var(--fondo); }
+.encabezado__barra { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; min-height: 64px; gap: .75rem; }
+.logo { flex: 1 1 0; min-width: 0; display: inline-flex; align-items: center; gap: .6rem; min-height: 48px; color: var(--texto); text-decoration: none; font-weight: 600; }
+.logo__marca { flex: none; display: inline-grid; place-items: center; width: 34px; height: 34px; background: var(--acento); color: #fff; font-weight: 700; }
+.menu-boton { display: none; align-items: center; min-width: 48px; min-height: 48px; padding: 0 1rem; font: inherit; font-weight: 600; color: var(--texto); background: transparent; border: 1px solid var(--texto); border-radius: var(--radio-boton); cursor: pointer; }
+.js .menu-boton { display: inline-flex; }
+.nav { width: 100%; }
+.nav ul { list-style: none; margin: 0; padding: 0 0 1rem; display: grid; gap: .15rem; }
+.nav a { display: flex; align-items: center; min-height: 48px; padding-inline: .6rem; color: var(--texto); text-decoration: none; }
+.nav a[aria-current="page"] { font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.nav__accion { margin-top: .5rem; }
+.nav a.boton { justify-content: center; color: #fff; text-decoration: none; }
+.js .nav { display: none; }
+.js .nav.abierto { display: block; }
+
+/* Bloques de datos */
+.datos-rapidos__lista { display: grid; margin: 0; }
+.datos-rapidos dt, .contacto__titulo { font-size: .875rem; color: var(--texto-suave); }
+.datos-rapidos dd { margin: 0; font-weight: 600; }
+.datos-rapidos a, .contacto__datos a { display: inline-flex; align-items: center; min-height: 48px; font-weight: 600; }
+.horario { margin: 0; }
+.horario div { display: flex; justify-content: space-between; gap: 1rem; padding: .7rem 0; border-bottom: 1px solid var(--borde); }
+.horario dt { font-weight: 600; }
+.horario dd { margin: 0; text-align: right; }
+.lista-puntos { list-style: none; margin: 0; padding: 0; }
+.lista-puntos li { padding: .7rem 0; border-bottom: 1px solid var(--borde); }
+.dos-columnas, .utilidades, .servicios, .medicos, .resenas, .contacto__grid, .sobre__grid { display: grid; gap: 1.5rem; }
+.servicio { display: flex; flex-direction: column; }
+.servicio__img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.servicio__cuerpo { display: flex; flex-direction: column; flex: 1; }
+.servicio__cuerpo > p { color: var(--texto-suave); }
+.servicio__enlace { margin-top: auto; display: inline-flex; align-items: center; min-height: 48px; font-weight: 600; }
+.resena { margin: 0; }
+.cta { padding-block: 1rem 3.5rem; }
+.cta__botones { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.25rem; }
+.cta__botones .boton { flex: 1 1 100%; }
+
+/* Página de servicios (texto, B4) */
+.categorias ul { list-style: none; margin: 1.25rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.categorias a { display: inline-flex; align-items: center; min-height: 48px; padding: 0 1.1rem; color: var(--texto); text-decoration: none; border: 1px solid var(--borde); border-radius: var(--radio-boton); }
+.catalogo { display: grid; gap: 2.5rem; padding-bottom: 3.5rem; }
+.catalogo__nota { color: var(--texto-suave); }
+.catalogo__lista { list-style: none; margin: 0; padding: 0; }
+.catalogo__item { padding: .85rem 0; border-bottom: 1px solid var(--borde); }
+.catalogo__renglon { display: flex; align-items: baseline; justify-content: space-between; gap: .75rem; margin: 0; font-weight: 600; }
+.catalogo__precio { white-space: nowrap; }
+.catalogo__desc { margin: .2rem 0 0; color: var(--texto-suave); max-width: 60ch; }
+
+/* Nosotros y preguntas */
+.sobre__img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.faq { margin-top: 1.25rem; border-top: 1px solid var(--borde); }
+.faq details { border-bottom: 1px solid var(--borde); }
+.faq summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 56px; padding-block: .8rem; font-weight: 600; cursor: pointer; list-style: none; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; font-size: 1.4rem; line-height: 1; }
+.faq details[open] summary::after { content: "\2212"; }
+.faq details p { color: var(--texto-suave); padding-bottom: 1.1rem; margin: 0; max-width: 68ch; }
+
+/* Galería y visor */
+.galeria { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+.galeria__item { display: block; height: 100%; overflow: hidden; }
+.galeria__item img { width: 100%; height: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.galeria li:first-child { grid-column: 1 / -1; }
+.galeria li:first-child img { aspect-ratio: 3 / 2; }
+.visor { border: 0; padding: 1rem; width: min(96vw, 1100px); background: #161616; color: #fff; }
+.visor::backdrop { background: rgba(0, 0, 0, .85); }
+.visor__imagen img { margin-inline: auto; max-height: 68vh; width: auto; object-fit: contain; }
+.visor__pie { margin: .75rem 0; color: #EBEBEB; font-size: .95rem; }
+.visor__botones { display: flex; flex-wrap: wrap; gap: .75rem; }
+.visor__botones button { flex: 1 1 auto; min-height: 48px; padding: 0 1.25rem; font: inherit; font-weight: 600; color: #fff; background: transparent; border: 1px solid #fff; border-radius: var(--radio-boton); cursor: pointer; }
+.visor__botones button:hover { background: #fff; color: #161616; }
+.visor :focus-visible { outline-color: #fff; }
+
+/* Contacto */
+.contacto__titulo { margin: 1.25rem 0 .2rem; font-family: var(--fuente-texto); font-weight: 600; }
+.contacto__titulo:first-child { margin-top: 0; }
+.mapa { margin-top: 2rem; overflow: hidden; }
+.mapa iframe { display: block; width: 100%; height: 380px; border: 0; }
+
+/* Pie */
+.pie { background: var(--pie); color: var(--pie-texto); padding-block: 3rem 6rem; font-size: .95rem; }
+.pie a { color: var(--pie-texto); display: inline-flex; align-items: center; min-height: 44px; }
+.pie p { margin-bottom: .4rem; }
+.pie__nombre, .pie__titulo { font-weight: 600; }
+.pie__grid { display: grid; gap: 1.75rem; }
+.pie__lista { list-style: none; margin: 0; padding: 0; }
+.pie__copy { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--borde); }
+
+/* WhatsApp flotante */
+.wa-flotante { position: fixed; right: 1rem; bottom: 1rem; z-index: 60; display: inline-flex; align-items: center; gap: .5rem; min-height: 56px; padding: 0 1.25rem; background: var(--whatsapp); color: #fff; font-weight: 600; text-decoration: none; }
+.wa-flotante:hover { background: var(--whatsapp-fuerte); }
+.wa-flotante svg { width: 24px; height: 24px; fill: currentColor; flex: none; }
+
+@media (min-width: 768px) {
+  .seccion { padding-block: 5rem; }
+  .acciones .boton, .cta__botones .boton { flex: 0 0 auto; }
+  .dos-columnas { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .servicios, .medicos, .resenas { grid-template-columns: repeat(2, 1fr); }
+  .catalogo { grid-template-columns: repeat(2, 1fr); gap: 3rem 4rem; }
+  .sobre__grid { grid-template-columns: 1.15fr 1fr; gap: 3.5rem; align-items: start; }
+  .galeria { grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+  .galeria li:first-child { grid-column: span 2; grid-row: span 2; }
+  .galeria li:first-child img { aspect-ratio: auto; }
+  .contacto__grid { grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: start; }
+  .pie__grid { grid-template-columns: 2fr 1.3fr 1fr; }
+  .js .menu-boton { display: none; }
+  .nav, .js .nav { display: block; width: auto; }
+  .nav ul { display: flex; align-items: center; gap: .1rem; padding: 0; }
+  .nav__accion { margin: 0 0 0 .6rem; }
+  .pie { padding-bottom: 5rem; }
+}
+@media (min-width: 1024px) {
+  .servicios { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ───────── Diseño CLÍNICO ─────────
+   Para consultorios de medicina general, pediatría, especialistas y dentistas.
+   Base: .claude/data/references/doctolib/DESIGN.md (oh-my-design; leído completo: colores, tipografía, componentes,
+   radios, elevación, Do's/Don'ts, motion). Accesibilidad: .claude/data/references/nhs/DESIGN.md (leído completo).
+   Lo que se tomó de Doctolib:
+   - Blanco con tinta marina #00264C para texto Y acción principal (Do); el azul de marca #045FAE solo en marca y enlaces
+     (Don't: no aclarar la acción al azul #107ACA). Superficie #F1F7FE, tinte #E7F4FD, borde #C9D9E8.
+   - La barra de búsqueda en píldora (60 px, borde #294056, botón marino con extremo de 32 px y costura blanca) como
+     «píldora de cita» en la portada: datos del consultorio + botón de WhatsApp (información, no formulario).
+   - Radios 8 / 12 / 32 / 999 px; una sola elevación (dos sombras suaves teñidas de marino).
+   - Foco: anillo doble blanco + #3A5978 en todos los controles. Transición de color 0.1 s (su Motion);
+     presionar scale(.96) en 150 ms (biblioteca-diseno/MOTION.md). Sin animaciones de entrada (Profesional).
+   Del NHS: cuerpo a 19 px y h1 de 32 px en celular; foco siempre visible.
+   Adaptación (G11): Montserrat/Roboto no se cargan; Roboto del sistema, Segoe UI o system-ui, titulares en 700.
+   Contrastes medidos: texto/fondo 15.20, texto/fondo-alt 14.10, texto-suave/fondo 10.70, texto-suave/fondo-alt 9.93,
+   acento/fondo 6.46, acento/fondo-alt 5.99, acento/tinte 5.77, blanco/acción 15.20, blanco/acento 6.46, pie 12.11. */
+
+:root {
+  --fondo: #FFFFFF;
+  --fondo-alt: #F1F7FE;
+  --tarjeta: #FFFFFF;
+  --tinte: #E7F4FD;
+  --texto: #00264C;
+  --texto-suave: #294056;
+  --acento: #045FAE;
+  --acento-fuerte: #034C8B;
+  --whatsapp: #00264C;
+  --whatsapp-fuerte: #00264C;
+  --positivo: #00806A;
+  --borde: #C9D9E8;
+  --borde-campo: #294056;
+  --anillo: #3A5978;
+  --oscuro: #00264C;
+  --pie: #00264C;
+  --pie-texto: #D0E9FB;
+  --radio-boton: 999px;
+  --radio-tarjeta: 12px;
+  --ancho: 1140px;
+  --sombra: 0 2px 4px rgba(5, 43, 71, .07), 0 5px 25px rgba(5, 43, 71, .09);
+  --fuente-titulos: Roboto, "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  --fuente-texto: Roboto, "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+}
+
+body { font-size: 1.1875rem; line-height: 1.47; }
+h1, h2, h3 { font-weight: 700; line-height: 1.15; color: var(--texto); text-wrap: balance; }
+h1 { font-size: 2rem; letter-spacing: -.01em; }
+h2 { font-size: 1.625rem; }
+h3 { font-size: 1.1875rem; }
+p { text-wrap: pretty; }
+:focus-visible { outline: 2px solid transparent; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--anillo); border-radius: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .boton, .cita__boton, .wa-flotante, .nav a, .categorias a { transition: background-color .1s, color .1s, border-color .1s, transform .15s; }
+  .boton:active, .cita__boton:active, .wa-flotante:active { transform: scale(.96); }
+}
+
+.boton { font-weight: 700; font-size: 1.0625rem; }
+.boton--borde { background: var(--tarjeta); color: var(--texto); border-color: var(--borde-campo); }
+.encabezado { background: var(--tarjeta); box-shadow: var(--sombra); }
+.logo { font-weight: 700; }
+.logo__marca { width: 40px; height: 40px; border-radius: 8px; background: var(--acento); }
+.menu-boton { border-color: var(--borde-campo); font-weight: 700; }
+.nav a { font-size: 1.0625rem; }
+.nav a[aria-current="page"] { font-weight: 700; color: var(--acento); }
+.enlace-mas, .servicio__enlace { font-weight: 700; color: var(--acento); }
+
+/* Portada: texto + píldora a la izquierda, foto de 12 px con la elevación a la derecha */
+.portada { padding-block: 2rem 3rem; }
+.portada__grid { display: grid; gap: 2rem; }
+.portada__giro { margin-bottom: .5rem; font-size: 1rem; font-weight: 700; color: var(--acento); }
+.portada__sub { color: var(--texto-suave); max-width: 42ch; }
+.portada__foto { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; box-shadow: var(--sombra); }
+
+/* Píldora de cita: tarjeta apilada en celular, píldora de 60 px desde 1024 px */
+.cita { display: grid; margin-top: 1.5rem; background: var(--tarjeta); border: 1px solid var(--borde-campo); border-radius: 12px; overflow: hidden; }
+.cita__dato { margin: 0; padding: .75rem 1rem; border-bottom: 1px solid var(--borde); font-weight: 700; }
+.cita__etiqueta { display: block; font-size: .875rem; font-weight: 400; color: var(--texto-suave); }
+.cita__boton { display: flex; align-items: center; justify-content: center; min-height: 60px; padding: 0 1.5rem; background: var(--whatsapp); color: #fff; font-weight: 700; text-decoration: none; text-align: center; }
+.cita__boton:focus-visible { border-radius: 0; box-shadow: inset 0 0 0 2px #FFFFFF, inset 0 0 0 4px var(--anillo); }
+.confianza { list-style: none; margin: 1rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; font-size: 1rem; color: var(--texto-suave); }
+.confianza li { display: inline-flex; align-items: center; min-height: 48px; gap: .5rem; }
+.confianza li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 999px; background: var(--positivo); }
+.confianza a { font-weight: 700; }
+
+/* Tarjetas blancas de 12 px con la elevación única sobre la superficie azul claro */
+.servicio, .medico, .tarjeta, .cta__caja { background: var(--tarjeta); border-radius: 12px; box-shadow: var(--sombra); overflow: hidden; }
+.servicio__img { aspect-ratio: 16 / 9; }
+.servicio__cuerpo { padding: 1rem 1.25rem .5rem; }
+.servicio__cuerpo > p { font-size: 1.0625rem; margin-bottom: .5rem; }
+.servicios, .medicos { margin-top: 1.5rem; }
+.tarjeta { padding: 1.5rem; overflow: visible; }
+.tarjeta__nota { margin: 1rem 0 0; color: var(--texto-suave); font-size: 1.0625rem; }
+
+/* Médicos y credenciales: el tinte azul guarda las cédulas */
+.medico { display: flex; flex-direction: column; }
+.medico__foto { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.medico__cuerpo { padding: 1.25rem; }
+.medico__especialidad { color: var(--acento); font-weight: 700; margin-bottom: .75rem; }
+.credenciales { margin: 0; padding: .25rem 1rem; background: var(--tinte); border-radius: 8px; }
+.credenciales div { padding: .6rem 0; border-bottom: 1px solid var(--borde); }
+.credenciales div:last-child { border-bottom: 0; }
+.credenciales dt { font-size: .875rem; color: var(--texto-suave); }
+.credenciales dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* Servicios en texto: categorías en píldora, precios tabulares */
+.categorias a { border-radius: 999px; border-color: var(--borde-campo); }
+.catalogo { padding-top: 1rem; }
+.catalogo__precio { font-variant-numeric: tabular-nums; }
+.lista-cabeza { padding-bottom: 1.5rem; }
+
+.faq summary::after { color: var(--acento); }
+.resena { padding: 1.5rem; background: var(--tarjeta); border-radius: 12px; box-shadow: var(--sombra); }
+.resena footer { margin-top: .75rem; color: var(--texto-suave); font-size: 1rem; }
+
+/* Urgencias: siempre visible, sin alarmismo de color */
+.urgencias { margin: 1.5rem 0 0; padding: 1rem 1.25rem; background: var(--fondo-alt); border: 1px solid var(--borde); border-radius: 12px; font-size: 1.0625rem; }
+.urgencias a { font-weight: 700; }
+
+/* Llamada final */
+.cta { padding-block: 3rem 4rem; }
+.cta__caja { padding: 2rem 1.5rem; overflow: visible; }
+.cta__caja > p { color: var(--texto-suave); max-width: 56ch; }
+.contacto__datos a { font-size: 1.25rem; }
+.mapa { border-radius: 12px; }
+
+/* Pie marino */
+.pie { font-size: 1rem; }
+.pie a { color: #FFFFFF; }
+.pie__nombre { color: #FFFFFF; font-size: 1.125rem; }
+.pie__medicos { margin-top: .75rem; }
+.pie__medicos li { padding: .2rem 0; }
+.pie__copy { border-top-color: rgba(208, 233, 251, .3); }
+.pie :focus-visible { box-shadow: 0 0 0 2px var(--pie), 0 0 0 4px #FFFFFF; }
+
+/* Botón flotante: píldora marina */
+.wa-flotante { border-radius: 999px; box-shadow: var(--sombra); font-weight: 700; }
+
+/* Visor de la galería en marino */
+.visor { background: var(--oscuro); border-radius: 12px; }
+.visor__botones button { border-radius: 999px; }
+.galeria__item { border-radius: 8px; }
+
+@media (hover: hover) {
+  .nav a:not(.boton):hover { color: var(--acento); }
+  .boton--borde:hover, .categorias a:hover { border-color: var(--texto); background: var(--fondo-alt); }
+}
+@media (min-width: 768px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  .medicos { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .cta__caja { padding: 2.5rem 3rem; }
+}
+@media (min-width: 1024px) {
+  .portada { padding-block: 3.5rem 4.5rem; }
+  .portada__grid { grid-template-columns: 1.25fr .75fr; gap: 3rem; align-items: center; }
+  .portada__foto { aspect-ratio: 4 / 3; }
+  h1 { font-size: 2.875rem; }
+  .cita { display: flex; border-radius: 32px; }
+  .cita__dato { flex: 1 1 0; display: flex; flex-direction: column; justify-content: center; min-height: 60px; padding: .35rem 1.1rem; border-bottom: 0; border-right: 1px solid var(--borde); font-size: .9375rem; line-height: 1.3; }
+  .cita__dato:first-child { padding-left: 1.5rem; }
+  .cita__dato:nth-child(2) { border-right: 0; }
+  .cita__boton { flex: none; padding: 0 1.25rem; border-left: 1px solid #FFFFFF; }
+}
+
+/* Sucursales (varias ubicaciones): tarjetas lado a lado desde 768 px */
+.sucursales { display: grid; gap: 1.25rem; margin-top: 1.5rem; }
+@media (min-width: 768px) { .sucursales { grid-template-columns: repeat(2, 1fr); } }
+.sucursal h3 { margin: 0 0 .75rem; }
+.sucursal__datos { margin: 0 0 1.25rem; display: grid; gap: .6rem; }
+.sucursal__datos div { display: grid; gap: .1rem; }
+.sucursal__datos dt { font-size: .9rem; font-weight: 700; color: var(--texto-suave); text-transform: uppercase; letter-spacing: .04em; }
+.sucursal__datos dd { margin: 0; }
+.sucursal .boton { width: 100%; justify-content: center; text-align: center; }
+
+/* Solo vista previa: datos pendientes */
+.pendiente { background: #FFE58A; color: #00264C; padding: 0 .3em; border-radius: 4px; }

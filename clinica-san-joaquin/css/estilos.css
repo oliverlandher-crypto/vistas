@@ -176,54 +176,48 @@ section[id], div[id] { scroll-margin-top: 5rem; }
   .servicios { grid-template-columns: repeat(4, 1fr); }
 }
 
-/* ───────── Diseño CLÍNICO ─────────
-   Para consultorios de medicina general, pediatría, especialistas y dentistas.
-   Base: .claude/data/references/doctolib/DESIGN.md (oh-my-design; leído completo: colores, tipografía, componentes,
-   radios, elevación, Do's/Don'ts, motion). Accesibilidad: .claude/data/references/nhs/DESIGN.md (leído completo).
-   Lo que se tomó de Doctolib:
-   - Blanco con tinta marina #00264C para texto Y acción principal (Do); el azul de marca #045FAE solo en marca y enlaces
-     (Don't: no aclarar la acción al azul #107ACA). Superficie #F1F7FE, tinte #E7F4FD, borde #C9D9E8.
-   - La barra de búsqueda en píldora (60 px, borde #294056, botón marino con extremo de 32 px y costura blanca) como
-     «píldora de cita» en la portada: datos del consultorio + botón de WhatsApp (información, no formulario).
-   - Radios 8 / 12 / 32 / 999 px; una sola elevación (dos sombras suaves teñidas de marino).
-   - Foco: anillo doble blanco + #3A5978 en todos los controles. Transición de color 0.1 s (su Motion);
-     presionar scale(.96) en 150 ms (biblioteca-diseno/MOTION.md). Sin animaciones de entrada (Profesional).
-   Del NHS: cuerpo a 19 px y h1 de 32 px en celular; foco siempre visible.
-   Adaptación (G11): Montserrat/Roboto no se cargan; Roboto del sistema, Segoe UI o system-ui, titulares en 700.
-   Contrastes medidos: texto/fondo 15.20, texto/fondo-alt 14.10, texto-suave/fondo 10.70, texto-suave/fondo-alt 9.93,
-   acento/fondo 6.46, acento/fondo-alt 5.99, acento/tinte 5.77, blanco/acción 15.20, blanco/acento 6.46, pie 12.11. */
+/* ───────── Diseño CLÍNICO · sistema «Stripe» (biblioteca-diseno/design-md/stripe/DESIGN.md) ─────────
+   Para consultorios y clínicas. Se tomó de Stripe:
+   - Tinta marina #0D253D para el texto; un solo índigo (#533AFD) para el botón principal y #4434D4 para enlaces y acentos
+     (Do: el índigo no es color de texto de cuerpo; un botón relleno por franja).
+   - Titulares en peso 300 con interletraje negativo (la firma tipográfica); botones en píldora; tarjetas de 12 px con
+     sombra teñida de azul (0 8px 24px / 0 2px 6px); superficie #F6F9FC; línea fina #E3E8EE.
+   - La malla de degradado de Stripe NO se usa: la regla G1 del proyecto prohíbe degradados; portada en superficie plana.
+   - Pie en azul noche #1C1E54. Cifras con «tnum».
+   Accesibilidad (se mantiene del diseño anterior, tomada del NHS): cuerpo a 19 px, foco siempre visible, objetivos de 48 px.
+   Tipografía: sohne-var no se carga (G11); se usa la del sistema (SF Pro / Segoe UI / Roboto) en peso 300 en titulares. */
 
 :root {
   --fondo: #FFFFFF;
-  --fondo-alt: #F1F7FE;
+  --fondo-alt: #F6F9FC;
   --tarjeta: #FFFFFF;
-  --tinte: #E7F4FD;
-  --texto: #00264C;
-  --texto-suave: #294056;
-  --acento: #045FAE;
-  --acento-fuerte: #034C8B;
-  --whatsapp: #00264C;
-  --whatsapp-fuerte: #00264C;
-  --positivo: #00806A;
-  --borde: #C9D9E8;
-  --borde-campo: #294056;
-  --anillo: #3A5978;
-  --oscuro: #00264C;
-  --pie: #00264C;
-  --pie-texto: #D0E9FB;
+  --tinte: #EEEDFF;
+  --texto: #0D253D;
+  --texto-suave: #273951;
+  --acento: #4434D4;
+  --acento-fuerte: #2E2B8C;
+  --whatsapp: #533AFD;
+  --whatsapp-fuerte: #4434D4;
+  --positivo: #533AFD;
+  --borde: #E3E8EE;
+  --borde-campo: #64748D;
+  --anillo: #2E2B8C;
+  --oscuro: #1C1E54;
+  --pie: #1C1E54;
+  --pie-texto: #D6D9FC;
   --radio-boton: 999px;
   --radio-tarjeta: 12px;
   --ancho: 1140px;
-  --sombra: 0 2px 4px rgba(5, 43, 71, .07), 0 5px 25px rgba(5, 43, 71, .09);
-  --fuente-titulos: Roboto, "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
-  --fuente-texto: Roboto, "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  --sombra: 0 8px 24px rgba(0, 55, 112, .08), 0 2px 6px rgba(0, 55, 112, .04);
+  --fuente-titulos: "SF Pro Display", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --fuente-texto: "SF Pro Text", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
 }
 
-body { font-size: 1.1875rem; line-height: 1.47; }
-h1, h2, h3 { font-weight: 700; line-height: 1.15; color: var(--texto); text-wrap: balance; }
-h1 { font-size: 2rem; letter-spacing: -.01em; }
+body { font-size: 1.1875rem; line-height: 1.47; font-feature-settings: "ss01"; }
+h1, h2 { font-weight: 300; line-height: 1.1; letter-spacing: -.02em; color: var(--texto); text-wrap: balance; }
+h1 { font-size: 2rem; letter-spacing: -.025em; }
 h2 { font-size: 1.625rem; }
-h3 { font-size: 1.1875rem; }
+h3 { font-size: 1.1875rem; font-weight: 500; line-height: 1.25; color: var(--texto); }
 p { text-wrap: pretty; }
 :focus-visible { outline: 2px solid transparent; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--anillo); border-radius: 4px; }
 @media (prefers-reduced-motion: no-preference) {
@@ -231,22 +225,23 @@ p { text-wrap: pretty; }
   .boton:active, .cita__boton:active, .wa-flotante:active { transform: scale(.96); }
 }
 
-.boton { font-weight: 700; font-size: 1.0625rem; }
+.boton { font-weight: 600; font-size: 1.0625rem; }
 .boton--borde { background: var(--tarjeta); color: var(--texto); border-color: var(--borde-campo); }
 .encabezado { background: var(--tarjeta); box-shadow: var(--sombra); }
-.logo { font-weight: 700; }
-.logo__marca { width: 40px; height: 40px; border-radius: 8px; background: var(--acento); }
+.logo { font-weight: 600; }
+.logo__marca { width: 40px; height: 40px; border-radius: 10px; background: var(--acento); }
 .menu-boton { border-color: var(--borde-campo); font-weight: 700; }
 .nav a { font-size: 1.0625rem; }
 .nav a[aria-current="page"] { font-weight: 700; color: var(--acento); }
 .enlace-mas, .servicio__enlace { font-weight: 700; color: var(--acento); }
 
 /* Portada: texto + píldora a la izquierda, foto de 12 px con la elevación a la derecha */
-.portada { padding-block: 2rem 3rem; }
+/* Sin degradados (G1): la malla de Stripe se cambia por un fondo plano de superficie. */
+.portada { padding-block: 2rem 3rem; background: var(--fondo-alt); }
 .portada__grid { display: grid; gap: 2rem; }
-.portada__giro { margin-bottom: .5rem; font-size: 1rem; font-weight: 700; color: var(--acento); }
+.portada__giro { margin-bottom: .5rem; font-size: 1rem; font-weight: 600; color: var(--acento); }
 .portada__sub { color: var(--texto-suave); max-width: 42ch; }
-.portada__foto { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; box-shadow: var(--sombra); }
+.portada__foto { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; box-shadow: var(--sombra); }
 
 /* Píldora de cita: tarjeta apilada en celular, píldora de 60 px desde 1024 px */
 .cita { display: grid; margin-top: 1.5rem; background: var(--tarjeta); border: 1px solid var(--borde-campo); border-radius: 12px; overflow: hidden; }
@@ -306,7 +301,7 @@ p { text-wrap: pretty; }
 .pie__nombre { color: #FFFFFF; font-size: 1.125rem; }
 .pie__medicos { margin-top: .75rem; }
 .pie__medicos li { padding: .2rem 0; }
-.pie__copy { border-top-color: rgba(208, 233, 251, .3); }
+.pie__copy { border-top-color: rgba(214, 217, 252, .25); }
 .pie :focus-visible { box-shadow: 0 0 0 2px var(--pie), 0 0 0 4px #FFFFFF; }
 
 /* Botón flotante: píldora marina */

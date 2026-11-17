@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Fogón de Noche"><g>
+  <mask id="im"><rect width="200" height="200" fill="#fff"/><circle cx="118" cy="52" r="26" fill="#000"/></mask>
+  <circle cx="100" cy="100" r="100" fill="#2b1a12"/>
+  <circle cx="102" cy="58" r="32" fill="#f4c542" mask="url(#im)"/>
+  <path d="M100 88 C113 106 119 118 114 132 C111 140 89 140 86 132 C81 118 88 106 100 88 Z" fill="#ef6c2a"/>
+  <path d="M100 110 C106 119 108 125 106 131 C104 136 96 136 94 131 C92 125 94 119 100 110 Z" fill="#f8b04a"/>
+  <path d="M30 134 H170 C170 152 140 160 100 160 C60 160 30 152 30 134 Z" fill="#f1e3cf"/>
+</g></svg>

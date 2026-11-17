@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fogón de Noche | Tacos y hamburguesas a domicilio</title>
+<meta name="description" content="Fogón de Noche: tacos, gringas, tortas y hamburguesas a domicilio. Pide por WhatsApp de lunes a sábado, de 5:00 a 10:30 p. m.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<!-- VISTA PREVIA PRIVADA: nombre y precios de ejemplo, por confirmar con el negocio. NO PUBLICAR. -->
+<style>
+:root{--bg:#2b1a12;--bg2:#36221a;--cre:#f1e3cf;--moon:#f4c542;--fuego:#ef6c2a;--txt:#f6ece0;--suave:#c9b49c;--linea:#4a3226;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--serif:Georgia,"Times New Roman",serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--txt);font:400 17px/1.55 var(--sans);padding-bottom:90px}
+img{display:block;max-width:100%}p{margin:0}h1,h2,h3{margin:0;font-family:var(--serif);line-height:1.15;text-wrap:balance}
+button,input,textarea,select{font:inherit}
+.c{max-width:900px;margin:0 auto;padding:0 18px}
+.aviso{background:#000;color:#fff;font-size:13px;text-align:center;padding:9px 14px}
+header{padding:18px 0;border-bottom:1px solid var(--linea)}
+header .c{display:flex;align-items:center;justify-content:space-between;gap:12px}
+header img{height:54px;width:auto}
+.estado{font-size:14px;padding:6px 12px;border-radius:99px;border:1px solid var(--linea);white-space:nowrap}
+.estado.on{border-color:#4f9b5a;color:#9fe0a8}.estado.off{border-color:#a2623d;color:#f0b48c}
+.hero{padding:52px 0 36px;text-align:center}
+.hero h1{font-size:clamp(34px,7vw,54px);margin-bottom:14px}
+.hero p{color:var(--suave);max-width:30em;margin:0 auto 24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:12px 28px;border-radius:99px;border:0;background:var(--fuego);color:#fff;font-weight:700;font-size:17px;text-decoration:none;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}.btn.g{background:transparent;border:2px solid var(--linea);color:var(--txt)}
+.datos{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px;font-size:14.5px;color:var(--suave)}
+.datos span{background:var(--bg2);border:1px solid var(--linea);padding:6px 14px;border-radius:99px}
+section{padding:34px 0}
+h2.t{font-size:28px;margin-bottom:6px;color:var(--moon)}
+.sub{color:var(--suave);font-size:15px;margin-bottom:18px}
+.item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid var(--linea)}
+.item b{display:block;font-weight:600}.item small{color:var(--suave)}
+.item .pr{font-family:var(--serif);font-size:19px;color:var(--cre);margin-right:6px;white-space:nowrap}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:40px;height:40px;border-radius:50%;border:1px solid var(--linea);background:var(--bg2);color:var(--txt);font-size:22px;line-height:1;cursor:pointer}
+.qty button:hover{border-color:var(--fuego)}
+.qty output{min-width:26px;text-align:center;font-weight:700}
+.nota{font-size:13.5px;color:var(--suave);margin-top:14px}
+.barra{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--cre);color:var(--bg);box-shadow:0 -6px 20px rgba(0,0,0,.35);transform:translateY(110%);transition:transform .25s}
+.barra.on{transform:none}
+.barra .c{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;padding-bottom:12px}
+.barra b{font-family:var(--serif);font-size:20px}
+.barra .btn{min-height:46px;padding:10px 22px}
+dialog{border:0;border-radius:18px;padding:0;max-width:520px;width:calc(100% - 28px);background:var(--cre);color:var(--bg)}
+dialog::backdrop{background:rgba(0,0,0,.65)}
+.f{padding:22px}.f h2{font-size:26px;margin-bottom:14px}
+.res{margin:0 0 14px;padding:0;list-style:none;font-size:15.5px}
+.res li{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dashed #d9c7ad}
+.tot{display:flex;justify-content:space-between;font-weight:700;font-size:18px;margin:10px 0 4px}
+.env{font-size:13.5px;color:#6a4c3a;margin-bottom:14px}
+label{display:block;font-weight:600;margin:12px 0 4px;font-size:15px}
+input[type=text],textarea,select{width:100%;padding:11px 12px;border:1px solid #cdb79a;border-radius:10px;background:#fff;color:var(--bg)}
+textarea{min-height:70px;resize:vertical}
+.acc{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.acc .btn{flex:1;min-width:150px}.acc .btn.g{color:var(--bg);border-color:#cdb79a}
+.err{color:#9c2d12;font-size:14px;margin-top:10px;min-height:1em}
+footer{padding:30px 0;text-align:center;color:var(--suave);font-size:14px;border-top:1px solid var(--linea)}
+@media(max-width:520px){.item{flex-wrap:wrap}.item .der{display:flex;align-items:center;justify-content:space-between;width:100%}}
+</style>
+</head>
+<body>
+<p class="aviso">Vista previa privada · el nombre y los precios de tacos, gringas, tortas y bebidas son de ejemplo y se confirman con el negocio · el número de WhatsApp está pendiente</p>
+<header><div class="c"><img src="logo.svg" alt="Fogón de Noche, tacos y hamburguesas"><span class="estado" id="estado">Pedidos a domicilio</span></div></header>
+
+<main>
+<div class="hero"><div class="c">
+<h1>Tacos y hamburguesas, a tu puerta</h1>
+<p>Arma tu pedido aquí y lo mandas por WhatsApp. Lo preparamos y te lo llevamos a domicilio.</p>
+<a class="btn" href="#menu">Hacer mi pedido</a>
+<div class="datos"><span>Solo entrega a domicilio</span><span>Lunes a sábado · 5:00 a 10:30 p. m.</span><span>Efectivo o transferencia</span></div>
+</div></div>
+
+<section id="menu"><div class="c">
+<h2 class="t">Menú</h2>
+<p class="sub">Toca + para agregar a tu pedido. Los tacos, gringas y tortas son de bistec, pastor o campechana.</p>
+<div id="lista"></div>
+<p class="nota">Precios en pesos mexicanos. El costo del envío se confirma por WhatsApp según tu zona.</p>
+</div></section>
+</main>
+
+<footer><div class="c">Fogón de Noche · Pedidos a domicilio por WhatsApp<br>Lunes a sábado, de 5:00 p. m. a 10:30 p. m.</div></footer>
+
+<div class="barra" id="barra"><div class="c"><div><small id="bn"></small><br><b id="bt"></b></div><button class="btn" id="ver">Ver mi pedido</button></div></div>
+
+<dialog id="dlg"><form method="dialog" class="f" id="frm" onsubmit="return false">
+<h2>Tu pedido</h2>
+<ul class="res" id="res"></ul>
+<div class="tot"><span>Total de comida</span><span id="tot"></span></div>
+<p class="env">No incluye el envío. Te confirmamos el costo por WhatsApp.</p>
+<label for="nom">Tu nombre</label><input type="text" id="nom" autocomplete="name">
+<label for="dir">Dirección y referencias para la entrega</label><textarea id="dir" placeholder="Calle, número, colonia y una referencia (por ejemplo, casa azul frente a la tienda)"></textarea>
+<label for="pag">¿Cómo vas a pagar?</label><select id="pag"><option>Efectivo</option><option>Transferencia</option></select>
+<label for="not">Notas (opcional)</label><textarea id="not" placeholder="Sin cebolla, salsa aparte, etc."></textarea>
+<p class="err" id="err" role="alert"></p>
+<div class="acc"><button type="button" class="btn g" id="cerrar">Seguir pidiendo</button><button type="button" class="btn" id="enviar">Enviar pedido por WhatsApp</button></div>
+</form></dialog>
+
+<script>
+// ===== CONFIGURACIÓN DEL NEGOCIO =====
+var WHATSAPP = "52XXXXXXXXXX";           // PENDIENTE: número del negocio con lada (52 + 10 dígitos)
+var NEGOCIO = "Fogón de Noche";
+var HORARIO = {desde: 17, hasta: 22.5};  // 5:00 p. m. a 10:30 p. m.; cierra los domingos
+var MENU = [
+  {cat:"Tacos", nota:"Precio por pieza", items:[
+    {n:"Taco de bistec", p:25},{n:"Taco de pastor", p:22},{n:"Taco campechano", p:27}]},
+  {cat:"Gringas", nota:"Tortilla de harina con queso", items:[
+    {n:"Gringa de bistec", p:60},{n:"Gringa de pastor", p:55},{n:"Gringa campechana", p:65}]},
+  {cat:"Tortas", items:[
+    {n:"Torta de bistec", p:85},{n:"Torta de pastor", p:75},{n:"Torta campechana", p:90}]},
+  {cat:"Hamburguesas", items:[
+    {n:"Hamburguesa clásica", p:110},{n:"Hamburguesa hawaiana", p:125},{n:"Hamburguesa de pastor", p:135},{n:"Hamburguesa norteña", p:140},{n:"Orden de papas", p:50}]},
+  {cat:"Bebidas", items:[
+    {n:"Refresco", p:25},{n:"Agua de sabor", p:25},{n:"Agua natural", p:15},{n:"Jugo", p:30}]}
+];
+// ======================================
+var cant = {}, lista = document.getElementById('lista');
+function $(i){return document.getElementById(i)}
+function fmt(n){return "$" + n.toLocaleString("es-MX")}
+MENU.forEach(function(g,gi){
+  var h = '<h3 style="font-size:21px;margin:26px 0 2px">'+g.cat+'</h3>' + (g.nota?'<p class="sub" style="margin-bottom:2px">'+g.nota+'</p>':'');
+  g.items.forEach(function(it,ii){
+    var id = gi+"-"+ii;
+    h += '<div class="item"><div><b>'+it.n+'</b></div><div class="der"><span class="pr">'+fmt(it.p)+'</span><div class="qty"><button type="button" data-id="'+id+'" data-d="-1" aria-label="Quitar '+it.n+'">−</button><output id="q'+id+'">0</output><button type="button" data-id="'+id+'" data-d="1" aria-label="Agregar '+it.n+'">+</button></div></div></div>';
+  });
+  lista.insertAdjacentHTML('beforeend', h);
+});
+function item(id){var a=id.split("-");return MENU[a[0]].items[a[1]]}
+function resumen(){var n=0,t=0,l=[];Object.keys(cant).forEach(function(id){var q=cant[id];if(q>0){var it=item(id);n+=q;t+=q*it.p;l.push({q:q,n:it.n,s:q*it.p})}});return{n:n,t:t,l:l}}
+function pinta(){var r=resumen();$('barra').classList.toggle('on',r.n>0);$('bn').textContent=r.n+(r.n===1?' producto':' productos');$('bt').textContent=fmt(r.t)}
+lista.addEventListener('click',function(e){var b=e.target.closest('button[data-id]');if(!b)return;var id=b.dataset.id;cant[id]=Math.max(0,(cant[id]||0)+Number(b.dataset.d));$('q'+id).textContent=cant[id];pinta()});
+$('ver').onclick=function(){var r=resumen();$('res').innerHTML=r.l.map(function(x){return '<li><span>'+x.q+' × '+x.n+'</span><span>'+fmt(x.s)+'</span></li>'}).join('');$('tot').textContent=fmt(r.t);$('err').textContent='';$('dlg').showModal()};
+$('cerrar').onclick=function(){$('dlg').close()};
+$('enviar').onclick=function(){
+  var r=resumen(), nom=$('nom').value.trim(), dir=$('dir').value.trim();
+  if(!r.n){$('err').textContent='Agrega al menos un producto.';return}
+  if(!nom||!dir){$('err').textContent='Escribe tu nombre y tu dirección para la entrega.';return}
+  if(/X/.test(WHATSAPP)){$('err').textContent='Vista previa: falta poner el número de WhatsApp del negocio.';return}
+  var m='Hola, quiero hacer un pedido a domicilio:\n\n'+r.l.map(function(x){return '• '+x.q+' × '+x.n+' — '+fmt(x.s)}).join('\n')+'\n\nTotal de comida: '+fmt(r.t)+' (sin envío)\n\nNombre: '+nom+'\nDirección: '+dir+'\nPago: '+$('pag').value+($('not').value.trim()?'\nNotas: '+$('not').value.trim():'');
+  window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(m),'_blank','noopener');
+};
+// Estado abierto / cerrado (hora de Ciudad de México)
+(function(){try{
+  var p=new Intl.DateTimeFormat('en-US',{timeZone:'America/Mexico_City',weekday:'short',hour:'numeric',minute:'numeric',hour12:false}).formatToParts(new Date()),o={};
+  p.forEach(function(x){o[x.type]=x.value});
+  var h=(Number(o.hour)%24)+Number(o.minute)/60, dom=o.weekday==='Sun', abierto=!dom&&h>=HORARIO.desde&&h<HORARIO.hasta, e=$('estado');
+  e.textContent=abierto?'Abierto ahora':'Cerrado ahora · lun a sáb, 5:00 a 10:30 p. m.';e.className='estado '+(abierto?'on':'off');
+}catch(_){}})();
+</script>
+</body>
+</html>

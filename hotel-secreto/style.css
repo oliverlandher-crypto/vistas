@@ -203,3 +203,8 @@ section[id], article[id] { scroll-margin-top: 4rem; }   /* el encabezado fijo no
   h1 { font-size: 4.5rem; }
   h2 { font-size: 3.25rem; }
 }
+
+/* Galería de fotos */
+.galeria { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-top: 2.5rem; }
+.galeria img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radio); }
+@media (min-width: 900px) { .galeria { grid-template-columns: repeat(4, 1fr); } }
